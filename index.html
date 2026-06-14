@@ -8,19 +8,11 @@
 <!-- EmailJS SDK -->
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
-<!-- Google Fonts -->
+<!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Lato:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
-/* ============================================================
-   ⚙️  EMAILJS CONFIG — ganti 3 nilai ini
-   ============================================================ */
-/* Lihat bagian <script> di bawah untuk mengisi:
-   EMAILJS_PUBLIC_KEY, EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID */
 
-/* ============================================================
-   RESET & BASE
-   ============================================================ */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 html { scroll-behavior: smooth; }
@@ -34,9 +26,7 @@ body {
   line-height: 1.7;
 }
 
-/* ============================================================
-   FALLING PETALS
-   ============================================================ */
+/* FALLING PETALS */
 #petals {
   position: fixed;
   inset: 0;
@@ -56,9 +46,7 @@ body {
   100% { transform: translateY(110vh) rotate(360deg) translateX(-20px); opacity: 0; }
 }
 
-/* ============================================================
-   HERO
-   ============================================================ */
+/* HERO */
 .hero {
   min-height: 100vh;
   display: flex;
@@ -138,9 +126,7 @@ body {
   to   { opacity:1; transform:translateY(0); }
 }
 
-/* ============================================================
-   SECTION WRAPPER
-   ============================================================ */
+/*  SECTION WRAPPER */
 .section {
   position: relative;
   z-index: 1;
@@ -162,9 +148,7 @@ body {
 .divider-line { flex: 1; height: 1px; background: #1c1c1c; }
 .divider-dot  { color: #c0392b; font-size: 13px; }
 
-/* ============================================================
-   SCROLL REVEAL
-   ============================================================ */
+/*  SCROLL REVEAL */
 .reveal {
   opacity: 0;
   transform: translateY(52px);
@@ -175,9 +159,7 @@ body {
   transform: translateY(0);
 }
 
-/* ============================================================
-   MESSAGE SECTION
-   ============================================================ */
+/* MESSAGE SECTION */
 .msg-label {
   font-size: 10px;
   letter-spacing: 0.42em;
@@ -194,9 +176,7 @@ body {
 }
 .msg-body em { font-style: italic; color: #ff9cc2; }
 
-/* ============================================================
-   REASONS
-   ============================================================ */
+/* REASONS */
 .reasons-intro {
   font-family: 'Playfair Display', serif;
   font-style: italic;
@@ -229,9 +209,7 @@ body {
 }
 .reason-text strong { color: #f0e8ee; font-weight: 400; }
 
-/* ============================================================
-   3-PHOTO GALLERY
-   ============================================================ */
+/*  3-PHOTO GALLERY */
 .gallery-section {
   position: relative;
   z-index: 1;
@@ -330,7 +308,7 @@ body {
 .photo-placeholder .ph-icon { font-size: 28px; }
 .photo-placeholder .ph-text {
   font-size: 12px;
-  color: #555;
+  color: #b7b6b6;
   letter-spacing: 0.05em;
 }
 .photo-placeholder .ph-num {
@@ -352,7 +330,7 @@ body {
   font-family: 'Playfair Display', serif;
   font-style: italic;
   font-size: 12px;
-  color: #555;
+  color: #b7b6b6;
   line-height: 1.5;
   opacity: 0;
   transform: translateY(12px);
@@ -365,9 +343,7 @@ body {
 
 input[type="file"] { display: none; }
 
-/* ============================================================
-   ANSWER SECTION
-   ============================================================ */
+/* ANSWER SECTION */
 .answer-section {
   position: relative;
   z-index: 1;
@@ -510,15 +486,13 @@ input[type="file"] { display: none; }
 .send-status.success { color: #6fcf97; }
 .send-status.error   { color: #eb5757; }
 
-/* ============================================================
-   CLOSING
-   ============================================================ */
+/* CLOSING */
 .closing {
   position: relative;
   z-index: 1;
   padding: 60px 28px 130px;
   text-align: center;
-  background: radial-gradient(ellipse at 50% 100%, #2a0010 0%, transparent 68%);
+  background: radial-gradient(ellipse at 50% 100%, #fa76a8 0%, transparent 68%);
 }
 .closing-text {
   font-family: 'Playfair Display', serif;
@@ -536,14 +510,12 @@ input[type="file"] { display: none; }
 .closing-sig {
   margin-top: 28px;
   font-size: 12px;
-  color: #444;
+  color: #ffffff;
   letter-spacing: 0.25em;
   text-transform: uppercase;
 }
 
-/* ============================================================
-   RESPONSIVE
-   ============================================================ */
+/* RESPONSIVE */
 @media (max-width: 560px) {
   .gallery-grid { grid-template-columns: 1fr; gap: 14px; }
   .photo-card:nth-child(2) .photo-inner { height: 260px; }
@@ -559,25 +531,25 @@ input[type="file"] { display: none; }
 <!-- Falling Petals -->
 <div id="petals"></div>
 
-<!-- ========== HERO ========== -->
+<!-- HERO -->
 <section class="hero">
-  <p class="hero-eyebrow">untuk kamu, selalu ♥</p>
-  <h1 class="hero-title">Kamu adalah<br><em>semua alasanku</em></h1>
-  <p class="hero-sub">ada hal yang ingin aku sampaikan...</p>
+  <p class="hero-eyebrow">untuk kamu, cintaku ♥</p>
+  <h1 class="hero-title">haloo cintaku<br><em>makasih yaa udah hadir dihidupku</em></h1>
+  <p class="hero-sub">aku ada sesuatu buat kamu</p>
   <div class="scroll-hint" onclick="document.querySelector('.message-section').scrollIntoView({behavior:'smooth'})">
     <span>scroll</span>
     <div class="scroll-line"></div>
   </div>
 </section>
 
-<!-- ========== MESSAGE ========== -->
+<!-- MESSAGE -->
 <section class="section message-section">
   <div class="reveal">
     <p class="msg-label">dari hatiku</p>
     <p class="msg-body">
-      Kamu mungkin tidak tahu seberapa besar <em>dampakmu</em> untukku.
-      Setiap harinya terasa lebih hangat karena kamu ada.
-      Ada yang selalu bikin aku senyum sendiri,
+      Kamu mungkin gatau seberapa besar <em>perasaanku</em> buat kamu.
+      makasih yaa, karena kamu, aku jadi lebih semangat ngejalanin hari hariku.
+      kamu yang selalu bikin aku senyum senyum sendiri,
       dan itu selalu tentang kamu.
     </p>
   </div>
@@ -589,27 +561,28 @@ input[type="file"] { display: none; }
   <div class="divider-line"></div>
 </div>
 
-<!-- ========== REASONS ========== -->
+<!-- REASONS  -->
 <section class="section">
   <div class="reveal">
-    <p class="reasons-intro">Hal-hal yang aku suka dari kamu...</p>
+    <p class="reasons-intro">hal-hal yang aku suka dari kamu</p>
   </div>
 
   <div class="reason-item">
     <span class="reason-num">01</span>
-    <p class="reason-text">Caramu <strong>tertawa</strong> — jujur dan lepas, selalu bikin suasana jadi hangat.</p>
+    <p class="reason-text">Caramu buatku <strong>tertawa</strong> — jujur dan lepas, kamu selalu tau cara ngehibur Aku</p>
   </div>
   <div class="reason-item">
     <span class="reason-num">02</span>
-    <p class="reason-text">Kamu selalu tahu kapan aku butuh didengar, tanpa perlu aku bilang.</p>
+    <p class="reason-text">Kamu selalu tau kapan aku butuh support, tanpa perlu aku bilang.</p>
   </div>
   <div class="reason-item">
     <span class="reason-num">03</span>
-    <p class="reason-text">Hal-hal kecil yang kamu perhatikan — itu yang membuatku sadar betapa <strong>penuh perhatian</strong>nya kamu.</p>
+    <p class="reason-text">Kamu selalu bisa nge buat pikiranku tertuju ke kamu, kamu bisa ngebuat pikiranku
+    <strong>ke-distract</strong> dengan tingkah lucu kamu.</p>
   </div>
   <div class="reason-item">
     <span class="reason-num">04</span>
-    <p class="reason-text">Bersamamu, aku merasa jadi versi <strong>terbaik</strong> diriku.</p>
+    <p class="reason-text">kalo sama kamu, aku merasa jadi versi <strong>terbaik</strong> diriku.</p>
   </div>
 </section>
 
@@ -619,18 +592,12 @@ input[type="file"] { display: none; }
   <div class="divider-line"></div>
 </div>
 
-<!-- ========== 3-PHOTO GALLERY ========== -->
-<!--
-  ⚙️  GANTI NAMA FILE FOTO DI SINI
-  Taruh foto1.jpg, foto2.jpg, foto3.jpg di folder yang sama dengan file HTML ini.
-  Kalau nama filenya beda, sesuaikan src di bawah.
--->
 <section class="gallery-section">
-  <p class="gallery-label reveal">momen bersama kamu</p>
+  <p class="gallery-label reveal">aku pinjem foto kamu yaa</p>
 
   <div class="gallery-grid">
 
-    <!-- Photo 1 — ganti src="foto1.jpg" sesuai nama file kamu -->
+    <!-- Photo 1  -->
     <div class="photo-card">
       <div class="photo-inner">
         <img src="foto1.jpeg" alt="foto 1" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
@@ -641,7 +608,7 @@ input[type="file"] { display: none; }
       </div>
     </div>
 
-    <!-- Photo 2 — ganti src="foto2.jpg" sesuai nama file kamu -->
+    <!-- Photo 2 -->
     <div class="photo-card">
       <div class="photo-inner">
         <img src="foto2.jpeg" alt="foto 2" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
@@ -667,9 +634,9 @@ input[type="file"] { display: none; }
 
   <!-- Captions under photos -->
   <div class="photo-caption-row">
-    <p class="photo-caption-item">yang pertama kali<br>membuatku sadar</p>
-    <p class="photo-caption-item">dan momen ini<br>tidak akan aku lupa</p>
-    <p class="photo-caption-item">setiap detiknya<br>selalu berharga</p>
+    <p class="photo-caption-item">ini foto kamu pas lagi<br>...</p>
+    <p class="photo-caption-item">ini foto yang paling cantik<br>menurutku</p>
+    <p class="photo-caption-item">ini foto yang paling <br>lucu</p>
   </div>
 
 </section>
@@ -708,11 +675,11 @@ input[type="file"] { display: none; }
 
     <label class="answer-field-label">dan satu pertanyaan...</label>
     <p style="font-family:'Playfair Display',serif; font-style:italic; font-size:20px; color:#e8dde6; margin-bottom:18px; line-height:1.4;">
-      Maukah kamu menjadi pacarku? ♥
+      mau ga, jadi pacarku? ♥
     </p>
 
     <div class="yn-buttons">
-      <button class="yn-btn" id="btn-yes" onclick="selectAnswer('Ya, mau ♥')">Ya, mau ♥</button>
+      <button class="yn-btn" id="btn-yes" onclick="selectAnswer('Ya, mau ♥')">MAUU ♥</button>
       <button class="yn-btn" id="btn-no"  onclick="selectAnswer('Belum siap...')">Belum siap...</button>
     </div>
 
@@ -725,45 +692,25 @@ input[type="file"] { display: none; }
 
 </section>
 
-<!-- ========== CLOSING ========== -->
+<!-- CLOSING -->
 <section class="closing reveal">
   <p class="closing-text">
     Terimakasih sudah ada,<br>
     dan selalu menjadi <em>dirimu</em>.
   </p>
-  <p class="closing-sig">— dengan cinta, selalu</p>
+  <p class="closing-sig">— made with love, pikii</p>
 </section>
 
-
-<!-- ============================================================
-     SCRIPT
-     ============================================================ -->
 <script>
-/* ============================================================
-   ⚙️  GANTI 3 NILAI INI DENGAN MILIKMU
-   Daftar gratis di https://www.emailjs.com
-   ============================================================ */
-const EMAILJS_PUBLIC_KEY  = 'NrGWBxQIGbqh8GdNe';   // Account > API Keys
-const EMAILJS_SERVICE_ID  = 'service_4kaqmqa';   // Email Services
-const EMAILJS_TEMPLATE_ID = 'template_9iusghh';  // Email Templates
 
-/*
-   Variabel template yang tersedia di EmailJS template kamu:
-   {{from_name}}    → nama yang mengisi form
-   {{yn_answer}}    → Ya/Tidak
-   {{message}}      → pesan / jawaban
-   {{to_name}}      → "Kamu" (pengirim website)
-   {{reply_to}}     → (kosong, karena anonim)
-*/
+const EMAILJS_PUBLIC_KEY  = 'NrGWBxQIGbqh8GdNe';   
+const EMAILJS_SERVICE_ID  = 'service_4kaqmqa';  
+const EMAILJS_TEMPLATE_ID = 'template_9iusghh'; 
 
-/* ============================================================
-   INIT EMAILJS
-   ============================================================ */
+/* INIT EMAILJS */
 emailjs.init(EMAILJS_PUBLIC_KEY);
 
-/* ============================================================
-   FALLING PETALS
-   ============================================================ */
+/* effec t*/
 (function spawnPetals() {
   const cont   = document.getElementById('petals');
   const colors = ['#ff6b9d','#ff3366','#c0392b','#ff99bb','#ffccdd','#ff4d7a'];
@@ -785,9 +732,7 @@ emailjs.init(EMAILJS_PUBLIC_KEY);
   }
 })();
 
-/* ============================================================
-   SCROLL REVEAL — IntersectionObserver
-   ============================================================ */
+/* === SCROLL REVEAL — IntersectionObserver === */
 const revealObs = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.14 });
@@ -807,9 +752,7 @@ document.querySelectorAll('.reason-item').forEach((el, i) => {
 });
 
 
-/* ============================================================
-   YES / NO SELECTION
-   ============================================================ */
+/* ====YES / NO SELECTION=== */
 let selectedYN = '';
 
 function selectAnswer(val) {
@@ -818,9 +761,7 @@ function selectAnswer(val) {
   document.getElementById('btn-no').classList.toggle('selected',  val === 'Belum siap...');
 }
 
-/* ============================================================
-   SEND VIA EMAILJS
-   ============================================================ */
+/* ==== SEND VIA EMAILJS ====== */
 async function sendAnswer() {
   const name    = document.getElementById('sender-name').value.trim();
   const msg     = document.getElementById('sender-message').value.trim();
