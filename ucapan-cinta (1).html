@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Untuk Kamu ♥</title>
+
+<!-- EmailJS SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   ⚙️  EMAILJS CONFIG — ganti 3 nilai ini
+   ============================================================ */
+/* Lihat bagian <script> di bawah untuk mengisi:
+   EMAILJS_PUBLIC_KEY, EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID */
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: #080508;
+  color: #f0e8ee;
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+  line-height: 1.7;
+}
+
+/* ============================================================
+   FALLING PETALS
+   ============================================================ */
+#petals {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.petal {
+  position: absolute;
+  border-radius: 50% 0 50% 0;
+  opacity: 0;
+  animation: petalFall linear infinite;
+}
+@keyframes petalFall {
+  0%   { transform: translateY(-30px) rotate(0deg) translateX(0); opacity: 0.8; }
+  50%  { transform: translateY(50vh)  rotate(180deg) translateX(30px); opacity: 0.5; }
+  100% { transform: translateY(110vh) rotate(360deg) translateX(-20px); opacity: 0; }
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 40px 24px;
+  background: radial-gradient(ellipse at 50% 65%, #3a0018 0%, transparent 65%);
+}
+
+.hero-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: #f9a8c9;
+  margin-bottom: 28px;
+  opacity: 0;
+  animation: fadeUp 1s ease 0.4s forwards;
+}
+
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(52px, 11vw, 100px);
+  font-weight: 700;
+  line-height: 1.05;
+  color: #fff;
+  opacity: 0;
+  animation: fadeUp 1s ease 0.7s forwards;
+}
+.hero-title em {
+  font-style: italic;
+  background: linear-gradient(135deg, #ff6b9d 0%, #ff3366 50%, #c0392b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-sub {
+  margin-top: 24px;
+  font-size: 16px;
+  color: #888;
+  letter-spacing: 0.06em;
+  opacity: 0;
+  animation: fadeUp 1s ease 1s forwards;
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;
+  animation: fadeUp 1s ease 1.5s forwards;
+  cursor: pointer;
+}
+.scroll-hint span {
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  color: #555;
+  text-transform: uppercase;
+}
+.scroll-line {
+  width: 1px;
+  height: 52px;
+  background: linear-gradient(to bottom, #ff6b9d, transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+@keyframes scrollPulse { 0%,100%{opacity:0.25} 50%{opacity:1} }
+
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(28px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+
+/* ============================================================
+   SECTION WRAPPER
+   ============================================================ */
+.section {
+  position: relative;
+  z-index: 1;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 90px 28px;
+}
+
+.divider {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 8px 28px;
+}
+.divider-line { flex: 1; height: 1px; background: #1c1c1c; }
+.divider-dot  { color: #c0392b; font-size: 13px; }
+
+/* ============================================================
+   SCROLL REVEAL
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(52px);
+  transition: opacity 0.95s ease, transform 0.95s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================================
+   MESSAGE SECTION
+   ============================================================ */
+.msg-label {
+  font-size: 10px;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: #ff6b9d;
+  margin-bottom: 22px;
+}
+.msg-body {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(20px, 3.5vw, 30px);
+  line-height: 1.72;
+  color: #e8dde6;
+  font-weight: 400;
+}
+.msg-body em { font-style: italic; color: #ff9cc2; }
+
+/* ============================================================
+   REASONS
+   ============================================================ */
+.reasons-intro {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 17px;
+  color: #666;
+  margin-bottom: 44px;
+}
+.reason-item {
+  display: flex;
+  gap: 22px;
+  align-items: flex-start;
+  margin-bottom: 32px;
+  opacity: 0;
+  transform: translateX(-28px);
+  transition: opacity 0.75s ease, transform 0.75s ease;
+}
+.reason-item.visible { opacity:1; transform:translateX(0); }
+.reason-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 12px;
+  color: #ff6b9d;
+  min-width: 28px;
+  padding-top: 4px;
+  opacity: 0.65;
+}
+.reason-text {
+  font-size: 16px;
+  line-height: 1.75;
+  color: #bbb;
+}
+.reason-text strong { color: #f0e8ee; font-weight: 400; }
+
+/* ============================================================
+   3-PHOTO GALLERY
+   ============================================================ */
+.gallery-section {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 80px 28px 90px;
+}
+.gallery-label {
+  font-size: 10px;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: #ff6b9d;
+  text-align: center;
+  margin-bottom: 56px;
+}
+.gallery-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+  align-items: end;
+}
+
+/* Individual photo cards with staggered reveal */
+.photo-card {
+  opacity: 0;
+  transform: translateY(60px) scale(0.93);
+  transition: opacity 1s ease, transform 1s ease;
+  position: relative;
+}
+.photo-card.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+.photo-card:nth-child(1) { transition-delay: 0s; }
+.photo-card:nth-child(2) { transition-delay: 0.18s; }
+.photo-card:nth-child(3) { transition-delay: 0.36s; }
+
+/* Middle card slightly taller */
+.photo-card:nth-child(2) .photo-inner { height: 340px; }
+.photo-card:nth-child(1) .photo-inner,
+.photo-card:nth-child(3) .photo-inner { height: 280px; }
+
+.photo-inner {
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  background: #110810;
+  border: 1px solid #1e1e1e;
+  cursor: pointer;
+}
+
+/* Animated gradient border on hover */
+.photo-inner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  padding: 2px;
+  background: linear-gradient(135deg, #ff6b9d, #c0392b, #ff6b9d);
+  background-size: 300% 300%;
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.4s;
+  animation: borderMove 3s linear infinite;
+  background-clip: border-box;
+}
+.photo-inner:hover::before { opacity: 1; }
+@keyframes borderMove {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.photo-inner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease;
+}
+.photo-inner:hover img { transform: scale(1.06); }
+
+/* Upload placeholder */
+.photo-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-align: center;
+  padding: 16px;
+}
+.photo-placeholder .ph-icon { font-size: 28px; }
+.photo-placeholder .ph-text {
+  font-size: 12px;
+  color: #555;
+  letter-spacing: 0.05em;
+}
+.photo-placeholder .ph-num {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 11px;
+  color: #ff6b9d;
+  opacity: 0.7;
+}
+
+.photo-caption-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+  margin-top: 16px;
+}
+.photo-caption-item {
+  text-align: center;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 12px;
+  color: #555;
+  line-height: 1.5;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.photo-caption-item.visible { opacity:1; transform:translateY(0); }
+.photo-caption-item:nth-child(1) { transition-delay: 0.1s; }
+.photo-caption-item:nth-child(2) { transition-delay: 0.28s; }
+.photo-caption-item:nth-child(3) { transition-delay: 0.46s; }
+
+input[type="file"] { display: none; }
+
+/* ============================================================
+   ANSWER SECTION
+   ============================================================ */
+.answer-section {
+  position: relative;
+  z-index: 1;
+  max-width: 540px;
+  margin: 0 auto;
+  padding: 80px 28px 120px;
+  text-align: center;
+}
+
+.answer-question {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(26px, 5vw, 42px);
+  line-height: 1.35;
+  color: #fff;
+  margin-bottom: 12px;
+}
+.answer-question em {
+  font-style: italic;
+  background: linear-gradient(135deg, #ff6b9d, #ff3366);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.answer-subtitle {
+  font-size: 14px;
+  color: #555;
+  letter-spacing: 0.08em;
+  margin-bottom: 44px;
+}
+
+.answer-box {
+  background: #0e080d;
+  border: 1px solid #2a1520;
+  border-radius: 18px;
+  padding: 32px 28px;
+  text-align: left;
+}
+
+.answer-field-label {
+  font-size: 10px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: #ff6b9d;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.answer-name-input,
+.answer-text-input {
+  width: 100%;
+  background: #080508;
+  border: 1px solid #1e1218;
+  border-radius: 10px;
+  color: #f0e8ee;
+  font-family: 'Lato', sans-serif;
+  font-size: 15px;
+  font-weight: 300;
+  padding: 12px 16px;
+  outline: none;
+  transition: border-color 0.3s;
+  margin-bottom: 20px;
+}
+.answer-name-input::placeholder,
+.answer-text-input::placeholder { color: #333; }
+.answer-name-input:focus,
+.answer-text-input:focus { border-color: #ff6b9d; }
+
+.answer-text-input {
+  resize: none;
+  height: 120px;
+  line-height: 1.65;
+  margin-bottom: 24px;
+}
+
+/* Yes/No buttons */
+.yn-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.yn-btn {
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid #2a1520;
+  background: #100810;
+  color: #aaa;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 17px;
+  cursor: pointer;
+  transition: all 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+.yn-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #ff6b9d22, #c0392b22);
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+.yn-btn:hover { border-color: #ff6b9d; color: #ff9cc2; }
+.yn-btn:hover::after { opacity: 1; }
+.yn-btn.selected {
+  border-color: #ff3366;
+  color: #fff;
+  background: #1a0010;
+}
+.yn-btn.selected::after { opacity: 1; }
+
+.send-btn {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, #c0392b, #ff3366);
+  border: none;
+  border-radius: 12px;
+  color: #fff;
+  font-family: 'Lato', sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: opacity 0.25s, transform 0.2s;
+}
+.send-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+.send-btn:active { transform: scale(0.98); }
+.send-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* Status message */
+.send-status {
+  margin-top: 18px;
+  font-size: 14px;
+  text-align: center;
+  min-height: 22px;
+  transition: opacity 0.4s;
+}
+.send-status.success { color: #6fcf97; }
+.send-status.error   { color: #eb5757; }
+
+/* ============================================================
+   CLOSING
+   ============================================================ */
+.closing {
+  position: relative;
+  z-index: 1;
+  padding: 60px 28px 130px;
+  text-align: center;
+  background: radial-gradient(ellipse at 50% 100%, #2a0010 0%, transparent 68%);
+}
+.closing-text {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(24px, 5vw, 44px);
+  line-height: 1.4;
+  color: #fff;
+}
+.closing-text em {
+  font-style: italic;
+  background: linear-gradient(135deg, #ff6b9d, #ff3366);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.closing-sig {
+  margin-top: 28px;
+  font-size: 12px;
+  color: #444;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 560px) {
+  .gallery-grid { grid-template-columns: 1fr; gap: 14px; }
+  .photo-card:nth-child(2) .photo-inner { height: 260px; }
+  .photo-card:nth-child(1) .photo-inner,
+  .photo-card:nth-child(3) .photo-inner { height: 240px; }
+  .photo-caption-row { grid-template-columns: 1fr; }
+  .yn-buttons { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- Falling Petals -->
+<div id="petals"></div>
+
+<!-- ========== HERO ========== -->
+<section class="hero">
+  <p class="hero-eyebrow">untuk kamu, selalu ♥</p>
+  <h1 class="hero-title">Kamu adalah<br><em>semua alasanku</em></h1>
+  <p class="hero-sub">ada hal yang ingin aku sampaikan...</p>
+  <div class="scroll-hint" onclick="document.querySelector('.message-section').scrollIntoView({behavior:'smooth'})">
+    <span>scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ========== MESSAGE ========== -->
+<section class="section message-section">
+  <div class="reveal">
+    <p class="msg-label">dari hatiku</p>
+    <p class="msg-body">
+      Kamu mungkin tidak tahu seberapa besar <em>dampakmu</em> untukku.
+      Setiap harinya terasa lebih hangat karena kamu ada.
+      Ada yang selalu bikin aku senyum sendiri,
+      dan itu selalu tentang kamu.
+    </p>
+  </div>
+</section>
+
+<div class="divider reveal">
+  <div class="divider-line"></div>
+  <div class="divider-dot">♥</div>
+  <div class="divider-line"></div>
+</div>
+
+<!-- ========== REASONS ========== -->
+<section class="section">
+  <div class="reveal">
+    <p class="reasons-intro">Hal-hal yang aku suka dari kamu...</p>
+  </div>
+
+  <div class="reason-item">
+    <span class="reason-num">01</span>
+    <p class="reason-text">Caramu <strong>tertawa</strong> — jujur dan lepas, selalu bikin suasana jadi hangat.</p>
+  </div>
+  <div class="reason-item">
+    <span class="reason-num">02</span>
+    <p class="reason-text">Kamu selalu tahu kapan aku butuh didengar, tanpa perlu aku bilang.</p>
+  </div>
+  <div class="reason-item">
+    <span class="reason-num">03</span>
+    <p class="reason-text">Hal-hal kecil yang kamu perhatikan — itu yang membuatku sadar betapa <strong>penuh perhatian</strong>nya kamu.</p>
+  </div>
+  <div class="reason-item">
+    <span class="reason-num">04</span>
+    <p class="reason-text">Bersamamu, aku merasa jadi versi <strong>terbaik</strong> diriku.</p>
+  </div>
+</section>
+
+<div class="divider reveal">
+  <div class="divider-line"></div>
+  <div class="divider-dot">♥</div>
+  <div class="divider-line"></div>
+</div>
+
+<!-- ========== 3-PHOTO GALLERY ========== -->
+<!--
+  ⚙️  GANTI NAMA FILE FOTO DI SINI
+  Taruh foto1.jpg, foto2.jpg, foto3.jpg di folder yang sama dengan file HTML ini.
+  Kalau nama filenya beda, sesuaikan src di bawah.
+-->
+<section class="gallery-section">
+  <p class="gallery-label reveal">momen bersama kamu</p>
+
+  <div class="gallery-grid">
+
+    <!-- Photo 1 — ganti src="foto1.jpg" sesuai nama file kamu -->
+    <div class="photo-card">
+      <div class="photo-inner">
+        <img src="foto1.jpeg" alt="foto 1" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="photo-placeholder" style="display:none">
+          <div class="ph-icon">🌸</div>
+          <p class="ph-text">foto1.jpg<br>tidak ditemukan</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Photo 2 — ganti src="foto2.jpg" sesuai nama file kamu -->
+    <div class="photo-card">
+      <div class="photo-inner">
+        <img src="foto2.jpeg" alt="foto 2" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="photo-placeholder" style="display:none">
+          <div class="ph-icon">💕</div>
+          <p class="ph-text">foto2.jpg<br>tidak ditemukan</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Photo 3 — ganti src="foto3.jpg" sesuai nama file kamu -->
+    <div class="photo-card">
+      <div class="photo-inner">
+        <img src="foto3.jpeg" alt="foto 3" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="photo-placeholder" style="display:none">
+          <div class="ph-icon">✨</div>
+          <p class="ph-text">foto3.jpg<br>tidak ditemukan</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Captions under photos -->
+  <div class="photo-caption-row">
+    <p class="photo-caption-item">yang pertama kali<br>membuatku sadar</p>
+    <p class="photo-caption-item">dan momen ini<br>tidak akan aku lupa</p>
+    <p class="photo-caption-item">setiap detiknya<br>selalu berharga</p>
+  </div>
+
+</section>
+
+<div class="divider reveal">
+  <div class="divider-line"></div>
+  <div class="divider-dot">♥</div>
+  <div class="divider-line"></div>
+</div>
+
+<!-- ========== ANSWER SECTION ========== -->
+<section class="answer-section reveal">
+
+  <h2 class="answer-question">
+    Jadi, <em>gimana</em><br>perasaanmu?
+  </h2>
+  <p class="answer-subtitle">tulis jawabanmu di sini, aku tunggu ♥</p>
+
+  <div class="answer-box">
+
+    <label class="answer-field-label">nama kamu</label>
+    <input
+      class="answer-name-input"
+      id="sender-name"
+      type="text"
+      placeholder="tulis namamu..."
+      maxlength="60"
+    >
+
+    <label class="answer-field-label">jawabanmu</label>
+    <textarea
+      class="answer-text-input"
+      id="sender-message"
+      placeholder="ceritakan apa yang kamu rasakan..."
+    ></textarea>
+
+    <label class="answer-field-label">dan satu pertanyaan...</label>
+    <p style="font-family:'Playfair Display',serif; font-style:italic; font-size:20px; color:#e8dde6; margin-bottom:18px; line-height:1.4;">
+      Maukah kamu menjadi pacarku? ♥
+    </p>
+
+    <div class="yn-buttons">
+      <button class="yn-btn" id="btn-yes" onclick="selectAnswer('Ya, mau ♥')">Ya, mau ♥</button>
+      <button class="yn-btn" id="btn-no"  onclick="selectAnswer('Belum siap...')">Belum siap...</button>
+    </div>
+
+    <button class="send-btn" id="send-btn" onclick="sendAnswer()">
+      Kirim Jawaban ♥
+    </button>
+
+    <p class="send-status" id="send-status"></p>
+  </div>
+
+</section>
+
+<!-- ========== CLOSING ========== -->
+<section class="closing reveal">
+  <p class="closing-text">
+    Terimakasih sudah ada,<br>
+    dan selalu menjadi <em>dirimu</em>.
+  </p>
+  <p class="closing-sig">— dengan cinta, selalu</p>
+</section>
+
+
+<!-- ============================================================
+     SCRIPT
+     ============================================================ -->
+<script>
+/* ============================================================
+   ⚙️  GANTI 3 NILAI INI DENGAN MILIKMU
+   Daftar gratis di https://www.emailjs.com
+   ============================================================ */
+const EMAILJS_PUBLIC_KEY  = 'GANTI_DENGAN_PUBLIC_KEY_KAMU';   // Account > API Keys
+const EMAILJS_SERVICE_ID  = 'GANTI_DENGAN_SERVICE_ID_KAMU';   // Email Services
+const EMAILJS_TEMPLATE_ID = 'GANTI_DENGAN_TEMPLATE_ID_KAMU';  // Email Templates
+
+/*
+   Variabel template yang tersedia di EmailJS template kamu:
+   {{from_name}}    → nama yang mengisi form
+   {{yn_answer}}    → Ya/Tidak
+   {{message}}      → pesan / jawaban
+   {{to_name}}      → "Kamu" (pengirim website)
+   {{reply_to}}     → (kosong, karena anonim)
+*/
+
+/* ============================================================
+   INIT EMAILJS
+   ============================================================ */
+emailjs.init(EMAILJS_PUBLIC_KEY);
+
+/* ============================================================
+   FALLING PETALS
+   ============================================================ */
+(function spawnPetals() {
+  const cont   = document.getElementById('petals');
+  const colors = ['#ff6b9d','#ff3366','#c0392b','#ff99bb','#ffccdd','#ff4d7a'];
+  for (let i = 0; i < 32; i++) {
+    const p   = document.createElement('div');
+    p.className = 'petal';
+    const sz  = 6 + Math.random() * 10;
+    p.style.cssText = [
+      `left:${Math.random()*100}%`,
+      `top:-${30 + Math.random()*60}px`,
+      `width:${sz}px`,
+      `height:${sz * 1.6}px`,
+      `background:${colors[Math.floor(Math.random()*colors.length)]}`,
+      `animation-duration:${7 + Math.random()*11}s`,
+      `animation-delay:${Math.random()*14}s`,
+      `opacity:0`
+    ].join(';');
+    cont.appendChild(p);
+  }
+})();
+
+/* ============================================================
+   SCROLL REVEAL — IntersectionObserver
+   ============================================================ */
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.14 });
+
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+// Photo cards
+document.querySelectorAll('.photo-card').forEach(el => revealObs.observe(el));
+
+// Photo captions
+document.querySelectorAll('.photo-caption-item').forEach(el => revealObs.observe(el));
+
+// Reason items (staggered)
+document.querySelectorAll('.reason-item').forEach((el, i) => {
+  el.style.transitionDelay = `${i * 0.13}s`;
+  revealObs.observe(el);
+});
+
+
+/* ============================================================
+   YES / NO SELECTION
+   ============================================================ */
+let selectedYN = '';
+
+function selectAnswer(val) {
+  selectedYN = val;
+  document.getElementById('btn-yes').classList.toggle('selected', val === 'Ya, mau ♥');
+  document.getElementById('btn-no').classList.toggle('selected',  val === 'Belum siap...');
+}
+
+/* ============================================================
+   SEND VIA EMAILJS
+   ============================================================ */
+async function sendAnswer() {
+  const name    = document.getElementById('sender-name').value.trim();
+  const msg     = document.getElementById('sender-message').value.trim();
+  const status  = document.getElementById('send-status');
+  const btn     = document.getElementById('send-btn');
+
+  if (!name) {
+    showStatus('Tuliskan namamu dulu ya 🌸', 'error'); return;
+  }
+  if (!selectedYN) {
+    showStatus('Pilih jawabanmu dulu ♥', 'error'); return;
+  }
+
+  btn.disabled      = true;
+  btn.textContent   = 'Mengirim...';
+  status.className  = 'send-status';
+  status.textContent = '';
+
+  const templateParams = {
+    from_name : name,
+    yn_answer : selectedYN,
+    message   : msg || '(tidak ada pesan tambahan)',
+    to_name   : 'Kamu',
+    reply_to  : ''
+  };
+
+  try {
+    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
+    showStatus('Terkirim! Aku sudah baca jawabanmu ♥', 'success');
+    btn.textContent = 'Terkirim ♥';
+  } catch (err) {
+    console.error('EmailJS error:', err);
+    showStatus('Gagal terkirim. Cek koneksi atau config EmailJS kamu.', 'error');
+    btn.disabled    = false;
+    btn.textContent = 'Kirim Jawaban ♥';
+  }
+}
+
+function showStatus(text, type) {
+  const el = document.getElementById('send-status');
+  el.textContent  = text;
+  el.className    = 'send-status ' + type;
+}
+</script>
+
+</body>
+</html>
